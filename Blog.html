@@ -48,7 +48,7 @@
             text-shadow: 0 0 10px rgba(28, 231, 231, 0.7);
             margin: 15px 0;
             opacity: 0;
-            animation: fadeIn 0.3s ease-out forwards;
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
         h2 {
@@ -56,7 +56,7 @@
             margin: 20px 0;
             color: #1ce7e7;
             opacity: 0;
-            animation: fadeIn 0.3s ease-out 0.2s forwards;
+            animation: fadeIn 0.5s ease-out 0.2s forwards;
         }
 
         @keyframes fadeIn {
@@ -71,8 +71,8 @@
             border: 5px solid #4eff0b;
             box-shadow: 0 0 20px rgba(78, 255, 11, 0.6);
             opacity: 0;
-            animation: popIn 0.4s cubic-bezier(0.5, 1.5, 0.5, 1.5) 0.1s forwards;
-            transition: all 0.2s ease;
+            animation: popIn 0.5s cubic-bezier(0.5, 1.5, 0.5, 1.5) 0.1s forwards;
+            transition: all 0.3s ease;
         }
 
         @keyframes popIn {
@@ -82,7 +82,7 @@
         }
 
         .profile-img:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(5deg);
             box-shadow: 0 0 30px rgba(78, 255, 11, 0.8);
         }
 
@@ -98,8 +98,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(78, 255, 11, 0.3);
             opacity: 0;
-            animation: slideUp 0.4s ease-out 0.3s forwards;
-            transition: all 0.2s ease;
+            animation: slideUp 0.5s ease-out 0.3s forwards;
+            transition: all 0.3s ease;
         }
 
         @keyframes slideUp {
@@ -108,30 +108,76 @@
         }
 
         .content-box:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.01);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         /* ===== FILE CARDS ===== */
         .file-card {
+            position: relative;
             background: rgba(40, 40, 60, 0.7);
             border-radius: 15px;
             padding: 20px;
-            margin: 15px 0;
+            margin: 25px 0;
             width: 100%;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             border-left: 4px solid #4eff0b;
             opacity: 0;
-            animation: fadeIn 0.3s ease-out forwards;
+            animation: fadeInSlideUp 0.5s ease-out forwards;
+            overflow: hidden;
+        }
+
+        /* Image container above each card */
+        .card-image-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            height: 100px;
+            gap: 10px;
+        }
+
+        .card-image {
+            width: 48%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(78, 255, 11, 0.5);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s ease;
+        }
+
+        .card-image.left {
+            animation: slideInLeft 0.5s ease-out 0.4s forwards;
+        }
+
+        .card-image.right {
+            animation: slideInRight 0.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px) translateY(-20px); }
+            to { opacity: 1; transform: translateX(0) translateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px) translateY(-20px); }
+            to { opacity: 1; transform: translateX(0) translateY(0); }
+        }
+
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .file-card:nth-child(1) { animation-delay: 0.4s; }
-        .file-card:nth-child(2) { animation-delay: 0.5s; }
-        .file-card:nth-child(3) { animation-delay: 0.6s; }
+        .file-card:nth-child(2) { animation-delay: 0.6s; }
+        .file-card:nth-child(3) { animation-delay: 0.8s; }
 
         .file-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             background: rgba(50, 50, 70, 0.8);
         }
@@ -141,24 +187,27 @@
             text-decoration: none;
             font-size: 1.2rem;
             font-weight: bold;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
         }
 
         .file-link:hover {
             color: #4eff0b;
+            background: rgba(255,255,255,0.1);
         }
 
         .file-icon {
             font-size: 1.5rem;
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease;
         }
 
         .file-link:hover .file-icon {
-            transform: scale(1.2);
+            transform: scale(1.3) rotate(10deg);
         }
 
         /* ===== BUTTON ===== */
@@ -170,23 +219,41 @@
             font-weight: bold;
             text-decoration: none;
             margin: 10px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             min-width: 180px;
             max-width: 100%;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             background: linear-gradient(45deg, #4CAF50, #2196F3);
             color: white;
             opacity: 0;
-            animation: fadeIn 0.3s ease-out 0.7s forwards;
+            animation: fadeIn 0.5s ease-out 1s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.05);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
+        .btn:hover::after {
+            opacity: 1;
+        }
+
         .btn:active {
-            transform: translateY(1px);
+            transform: translateY(2px);
         }
 
         /* ===== MEDIA QUERIES ===== */
@@ -202,6 +269,10 @@
             .btn {
                 width: 100%;
                 max-width: 280px;
+            }
+
+            .card-image-container {
+                height: 80px;
             }
         }
     </style>
@@ -219,23 +290,38 @@
 
     <div class="content-box">
         <div class="file-card">
+            <div class="card-image-container">
+
+                <img src="warden-seed-1.webp" alt="Left Image" class="card-image left">
+                <img src="warden-seed-4.webp" alt="Right Image" class="card-image right">
+            </div>
             <a href="warden-seed.html" class="file-link">
-                <span class="file-icon"></span>
-                <span>Minecraft Warden Seed</span>
+                <span class="file-icon">Warden</span>
+                <span>Seed</span>
             </a>
         </div>
 
         <div class="file-card">
-            <a href="4villageseed" class="file-link">
-                <span class="file-icon"></span>
-                <span>Έρχεται4 villages seed πατα για να δεις!</span>
+            <div class="card-image-container">
+
+                <img src="4villageseed-1.png" alt="Left Image" class="card-image left">
+                <img src="4villageseed-4.png" alt="Right Image" class="card-image right">
+            </div>
+            <a href="4villageseed.html" class="file-link">
+                <span class="file-icon">4</span>
+                <span> village seed στο spawn 1.21+</span>
             </a>
         </div>
 
         <div class="file-card">
+            <div class="card-image-container">
+
+                <img src="image5.jpg" alt="Left Image" class="card-image left">
+                <img src="image6.jpg" alt="Right Image" class="card-image right">
+            </div>
             <a href="#" class="file-link">
-                <span class="file-icon"></span>
-                <span>Τίποτα ακόμα!</span>
+                <span class="file-icon">Τίποτα</span>
+                <span>ακόμα!</span>
             </a>
         </div>
     </div>
@@ -244,5 +330,17 @@
         Επιστροφή στην Αρχική
     </a>
 </div>
+
+<script>
+    // Add smooth scrolling to all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 </body>
 </html>

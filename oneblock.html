@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-    <title>oneblock</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneBlock - HellonaGR</title>
     <style>
+        :root {
+            --primary-green: #4eff0b;
+            --text-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --white-transparent: rgba(255, 255, 255, 0.8);
+            --white-transparent-hover: rgba(255, 255, 255, 0.95);
+            --youtube-red: #FF0000;
+            --home-bg: #cccee7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(78, 255, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0); }
+        }
+
         body {
             text-align: center;
-            background-image: url("back1.png");
+            background-image: url("back2.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+            color: var(--text-color);
         }
 
         h1 {
-            font-size: 70px;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             color: #000000;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 5px var(--shadow-color);
+            margin-bottom: clamp(10px, 3vw, 20px);
+            animation: fadeIn 1s ease-in-out;
         }
 
         .container {
@@ -22,71 +69,136 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             padding: 20px;
-        }
-        .text-box-3 {
-            max-width: 600px;
-            background: #0ff1f8;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .text-box {
+        .content-box {
             max-width: 600px;
-            background: #4eff0b;
-            padding: 20px;
+            width: 100%;
+            padding: clamp(15px, 3vw, 25px);
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 12px var(--shadow-color);
+            margin: clamp(10px, 3vw, 20px) 0;
+            background: var(--white-transparent);
+            animation: slideUp 0.8s ease-out;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-green);
         }
-        .text-box-2 {
-            max-width: 600px;
-            background: #FF0000;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+            background: var(--white-transparent-hover);
+        }
 
         p {
-            font-size: 18px;
-            color: #333;
+            font-size: clamp(1rem, 4vw, 1.125rem);
+            color: var(--text-color);
             line-height: 1.6;
+            margin: 0;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        .image-container img {
-            width: 150px;
-            height: 150px;
+        strong {
+            color: var(--primary-green);
+        }
+
+        .profile-img {
+            width: clamp(150px, 30vw, 200px);
+            height: clamp(150px, 30vw, 200px);
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid #4eff0b;
+            border: 5px solid var(--primary-green);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            animation: pulse 2s infinite, fadeIn 1s ease-in-out;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: clamp(10px, 3vw, 14px) clamp(15px, 4vw, 28px);
+            border-radius: 50px;
+            font-size: clamp(1rem, 4vw, 1.125rem);
+            font-weight: bold;
+            text-decoration: none;
+            margin: clamp(8px, 2vw, 15px) 5px;
+            transition: all 0.3s ease;
+            animation: fadeIn 1.5s ease-in-out;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            min-width: clamp(160px, 40vw, 200px);
+        }
+
+        .btn-youtube {
+            background-color: var(--youtube-red);
+            color: white;
+        }
+
+        .btn-home {
+            background-color: var(--white-transparent);
+            color: var(--text-color);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .profile-img {
+                border-width: 3px;
+            }
+
+            .content-box {
+                padding: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>oneblock</h1>
-    <div class="text-box">
+    <h1>
+        <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
+             alt="Profile Picture"
+             class="profile-img">
+        <br>
+        HellonaGR
+    </h1>
+
+    <h1 style="font-size: clamp(1.8rem, 6vw, 3rem); animation: fadeIn 1.2s ease-in-out;">OneBlock</h1>
+
+    <div class="content-box">
         <p>
-        <p>
-            Η σειρά <strong>OneBlock</strong> του HellonaGR στο YouTube είναι μία από τις πιο δημοφιλείς σειρές του. Ο HellonaGR και οι φίλοι του παίζουν Minecraft με έναν ιδιαίτερο κανόνα. Ξεκινάνε με <strong>ένα μόνο block</strong> και από εκεί αναπτύσσουν όλο το παιχνίδι τους! Καθώς σπάνε το block, αποκαλύπτονται νέα πράγματα του παιχνιδιού, δημιουργώντας συνεχώς νέες προκλήσεις και ευκαιρίες για δημιουργία και εξερεύνηση. Η σειρά συνδυάζει τη στρατηγική σκέψη με την ψυχαγωγία, κάνοντάς την ενδιαφέρουσα για κάθε φάση του παιχνιδιού.
+            Η σειρά <strong>OneBlock</strong> του HellonaGR στο YouTube είναι μία από τις πιο δημοφιλείς σειρές του.
+            Ο HellonaGR και οι φίλοι του παίζουν Minecraft με έναν ιδιαίτερο κανόνα. Ξεκινάνε με <strong>ένα μόνο block</strong>
+            και από εκεί αναπτύσσουν όλο το παιχνίδι τους! Καθώς σπάνε το block, αποκαλύπτονται νέα πράγματα του παιχνιδιού,
+            δημιουργώντας συνεχώς νέες προκλήσεις και ευκαιρίες για δημιουργία και εξερεύνηση.
+            Η σειρά συνδυάζει τη στρατηγική σκέψη με την ψυχαγωγία, κάνοντάς την ενδιαφέρουσα για κάθε φάση του παιχνιδιού.
         </p>
     </div>
+
+    <a href="https://www.youtube.com/playlist?list=PLkmEv2dmS4AZEO--VZnoNdE1cTL7EU3Z1"
+       class="btn btn-youtube"
+       target="_blank">
+        Δείτε τη σειρά στο YouTube
+    </a>
+
+    <a href="index.html" class="btn btn-home">
+        Επιστροφή στην Αρχική
+    </a>
+</div>
 </body>
-
-
-<h3>________________________________________________________________</h3>
-<div class="text-box-2">
-    <a href="https://www.youtube.com/playlist?list=PLkmEv2dmS4AZEO--VZnoNdE1cTL7EU3Z1">Oneblock στο youtube</a>
-</div>
-<h3>________________________</h3>
-<div class="text-box-3">
-
-
-
-    <a href="index.html">Home</a>
-
-
-
-</div>
 </html>
-

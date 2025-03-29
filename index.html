@@ -5,109 +5,224 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HellonaGR</title>
     <style>
-        body {
-            text-align: center;
-            background-image: url("back1.png");
-            font-family: Arial, sans-serif;
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(78, 255, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0); }
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        h1 {
-            font-size: 70px;
-            color: #000000;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-        
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-image: url("back1.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 0.8s ease-out;
         }
 
+        /* ===== LAYOUT ===== */
         .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-
         }
 
+        /* ===== HEADER ===== */
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-        .text-box {
-            max-width: 600px;
-            background: #cccee7;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin: 20px 0;
+            animation: fadeIn 1s ease-out;
         }
-        .text-box-2 {
-            max-width: 600px;
-            background: #FF0000;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+        .profile-img {
+            width: clamp(120px, 25vw, 200px);
+            height: clamp(120px, 25vw, 200px);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #4eff0b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 3s infinite, fadeIn 1s ease-out;
+            transition: transform 0.3s ease;
         }
-        .image-container img {
-              width: 150px; 
-              height: 150px;
-              border-radius: 50%;
-              object-fit: cover;
-              border: 5px solid #0d1ef1;
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== CONTENT BOX ===== */
+        .content-box {
+            background: rgba(204, 206, 231, 0.9);
+            border-radius: 12px;
+            padding: clamp(20px, 3vw, 30px);
+            margin: 20px 0;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid #4eff0b;
+            animation: slideUp 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
 
         p {
-            font-size: 18px;
+            font-size: clamp(1rem, 1.1vw, 1.2rem);
             color: #333;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: clamp(12px, 2vw, 16px) clamp(24px, 3vw, 32px);
+            border-radius: 50px;
+            font-size: clamp(1rem, 1.1vw, 1.2rem);
+            font-weight: bold;
+            text-decoration: none;
+            margin: 10px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            min-width: 180px;
+            max-width: 100%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .btn-contact {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-oneblock {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .btn-shorts {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* ===== LINKS ===== */
+        .channel-link {
+            color: #FF0000; /* Κόκκινο για YouTube */
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .channel-link:hover {
+            text-decoration: underline;
+            color: #cc0000;
+        }
+
+        /* Αφαίρεση του βέλους */
+        .channel-link::after {
+            content: none;
+        }
+
+        /* ===== SERIES CONTAINER ===== */
+        .series-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+            animation: slideUp 1s ease-out;
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .content-box {
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
         }
     </style>
 </head>
 <body>
-
 <div class="container">
     <h1>
-        <img src="logo.png" alt="Logo" style="width: 150px; height: auto;">
+        <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
+             alt="HellonaGR"
+             class="profile-img">
         <br>
         HellonaGR
     </h1>
 
-    <div class="text-box">
+    <div class="content-box">
         <p>
-            Το κανάλι <strong><a href="https://www.youtube.com/@HellonaGR">@HellonaGR</a></strong>
-            στο <a href="https://www.youtube.com">YouTube</a> προσφέρει ψυχαγωγικό περιεχόμενο με έμφαση στο gaming και άλλα ενδιαφέροντα θέματα.
+            Το κανάλι <strong><a href="https://www.youtube.com/@HellonaGR" class="channel-link">@HellonaGR</a></strong>
+            στο <a href="https://www.youtube.com" class="channel-link">YouTube</a> προσφέρει ψυχαγωγικό περιεχόμενο με έμφαση στο gaming και άλλα ενδιαφέροντα θέματα.
             Μέσα από χαλαρή και φιλική ατμόσφαιρα, παρουσιάζονται gameplay βίντεο, challenges και στιγμές διασκέδασης.
+        </p>
+        <p>
             Αν σου αρέσει το gaming και αναζητάς περιεχόμενο με άμεση αλληλεπίδραση, μπορείς να ρίξεις μια ματιά στα βίντεο του καναλιού!
         </p>
     </div>
-    <title>Σειρές</title>
+
+    <a href="epikinonia.html" class="btn btn-contact">Επικοινωνία</a>
+
     <h2>Σειρές</h2>
-    <div class="text-box-2">
-     <!------------------------------------------------------------------>
-                <h3>
-                    <a href="oneblock.html">oneblock</a>
-                </h3>
-    <!------------------------------------------------------------------>
-                <h3>
-                 <a href="shorts.html">Shorts</a>
-                </h3>
-    <!------------------------------------------------------------------>
 
-
-
-    <!------------------------------------------------------------------>
-
-
-
-    <!------------------------------------------------------------------>
-
-
-
-    <!------------------------------------------------------------------>
-  
-    <title>blog</title>
-  
-
-
-
-
-
-
+    <div class="series-container">
+        <a href="oneblock.html" class="btn btn-oneblock">OneBlock</a>
+        <a href="shorts.html" class="btn btn-shorts">Shorts</a>
+    </div>
+</div>
 </body>
 </html>

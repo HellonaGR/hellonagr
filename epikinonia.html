@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Επικοινωνία - HellonaGR</title>
+  <style>
+    :root {
+      --primary-color: #4eff0b;
+      --text-color: #333;
+      --shadow-color: rgba(0, 0, 0, 0.2);
+      --white-transparent: rgba(255, 255, 255, 0.8);
+      --white-transparent-hover: rgba(255, 255, 255, 0.95);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: center;
+      background-image: url("back2.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #f0f0f0; /* Fallback color */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: var(--text-color);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      color: #000000;
+      text-shadow: 2px 2px 5px var(--shadow-color);
+      margin: 20px 0;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white-transparent);
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px var(--shadow-color);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text-color);
+      width: 100%;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 16px var(--shadow-color);
+      background: var(--white-transparent-hover);
+    }
+
+    .contact-item img {
+      margin-right: 15px;
+      transition: transform 0.3s ease;
+      height: auto;
+    }
+
+    .contact-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .profile-img {
+      width: clamp(150px, 30vw, 200px);
+      height: clamp(150px, 30vw, 200px);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--primary-color);
+      box-shadow: 0 4px 8px var(--shadow-color);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(78, 255, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0); }
+    }
+
+    .contact-text {
+      font-size: clamp(1rem, 4vw, 1.25rem);
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .youtube-text {
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      font-weight: bold;
+      color: #FF0000;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .contact-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+
+      .contact-item img {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+
+      .contact-text, .youtube-text {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-img {
+        border-width: 3px;
+      }
+
+      .contact-item {
+        padding: 12px;
+      }
+
+      .contact-item img {
+        width: 30px;
+      }
+
+      .contact-item img[width="100"] {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>
+    <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
+         alt="Profile Picture"
+         class="profile-img">
+    <br>
+    HellonaGR
+  </h1>
+
+  <div class="contact-container">
+    <a href="mailto:hellonagr@gmail.com" class="contact-item">
+      <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" width="40">
+      <span class="contact-text">hellonagr@gmail.com</span>
+    </a>
+
+    <a href="https://www.youtube.com/@hellonagr" target="_blank" class="contact-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" width="100">
+      <span class="youtube-text">@HellonaGR</span>
+    </a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,8 +1,262 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorts - HellonaGR</title>
+    <style>
+        /* ===== ΒΑΣΙΚΑ STYLES & ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(78, 255, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0); }
+        }
 
-<h2>
-<a href="index.html">Home</a>
-</h2>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-image: url("back1.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            animation: fadeIn 1s ease-out;
+            padding: 20px;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 40px);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #4eff0b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite, fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: #000;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+        }
+
+        /* ===== CONTENT BOX ===== */
+        .content-box {
+            background-color: #e4ebeb;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+            border-left: 5px solid #4eff0b;
+            animation: slideUp 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        p {
+            font-size: clamp(1rem, 1.1vw, 1.2rem);
+            margin-bottom: 15px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: clamp(1rem, 1.1vw, 1.2rem);
+            font-weight: bold;
+            text-decoration: none;
+            margin: 10px 5px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .btn-shorts {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        .btn-home {
+            background-color: #e4ebeb;
+            color: #333;
+            border: 2px solid #4eff0b;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            margin: 25px 0;
+            color: rgba(0,0,0,0.1);
+            font-size: 24px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* ===== HIGHLIGHTS ===== */
+        .shorts-highlight {
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+        /* ===== LIST STYLES ===== */
+        .features-list {
+            text-align: left;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            font-size: clamp(1rem, 1.1vw, 1.1rem);
+            position: relative;
+            list-style-type: none;
+            padding-left: 25px;
+        }
+
+        .features-list li:before {
+            content: "•";
+            color: #ff5722;
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+
+        /* ===== RESPONSIVE ADJUSTMENTS ===== */
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .content-box {
+                padding: 20px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                min-width: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .content-box {
+                padding: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
+             alt="HellonaGR Profile"
+             class="profile-img">
+        <h1>HellonaGR</h1>
+        <h1 style="font-size: clamp(1.8rem, 4vw, 2.5rem);">Shorts</h1>
+    </header>
+
+    <div class="content-box">
+        <p>
+            Τα <span class="shorts-highlight">Shorts</span> του HellonaGR στο YouTube είναι γρήγορα, δυναμικά και
+            <span class="shorts-highlight">πολύ διασκεδαστικά</span> βίντεο μικρής διάρκειας!
+        </p>
+
+        <ul class="features-list">
+            <li><strong>Αστείες στιγμές</strong> από gameplay</li>
+            <li><strong>Εντυπωσιακές επιδόσεις</strong> στο Minecraft</li>
+            <li><strong>Απίθανες κατασκευές</strong> και ταχυδακτυλουργίες</li>
+            <li><strong>Αστείες αντιδράσεις</strong> και bloopers</li>
+        </ul>
+
+        <p>
+            Είναι η τέλεια επιλογή όταν θέλεις μια γρήγορη δόση διασκέδασης!
+        </p>
+    </div>
 
 
 
-<h1>Θα το φτιάξω σύντομα</h1>
+    <a href="https://www.youtube.com/@HellonaGR/shorts"
+       class="btn btn-shorts"
+       target="_blank">
+        Δείτε όλα τα Shorts
+    </a>
+
+
+
+    <a href="index.html" class="btn btn-home">
+        Επιστροφή στην Αρχική
+    </a>
+</div>
+</body>
+</html>

@@ -1,11 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
-    <meta charset="UTF-8">
-    <title>Files-hub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HellonaGR Files & blog</title>
+  <style>
+    /* ===== BASE STYLES ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-image: url("back2.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== HEADER ===== */
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: #fff;
+      text-shadow: 0 0 10px rgba(28, 231, 231, 0.7);
+      margin: 15px 0;
+      opacity: 0;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin: 20px 0;
+      color: #1ce7e7;
+      opacity: 0;
+      animation: fadeIn 0.3s ease-out 0.2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .profile-img {
+      width: clamp(120px, 25vw, 200px);
+      height: clamp(120px, 25vw, 200px);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #4eff0b;
+      box-shadow: 0 0 20px rgba(78, 255, 11, 0.6);
+      opacity: 0;
+      animation: popIn 0.4s cubic-bezier(0.5, 1.5, 0.5, 1.5) 0.1s forwards;
+      transition: all 0.2s ease;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      70% { transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(78, 255, 11, 0.8);
+    }
+
+    /* ===== CONTENT BOX ===== */
+    .content-box {
+      background: rgba(30, 30, 50, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: clamp(20px, 3vw, 30px);
+      margin: 20px 0;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(78, 255, 11, 0.3);
+      opacity: 0;
+      animation: slideUp 0.4s ease-out 0.3s forwards;
+      transition: all 0.2s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ===== FILE CARDS ===== */
+    .file-card {
+      background: rgba(40, 40, 60, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px 0;
+      width: 100%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      border-left: 4px solid #4eff0b;
+      opacity: 0;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .file-card:nth-child(1) { animation-delay: 0.4s; }
+    .file-card:nth-child(2) { animation-delay: 0.5s; }
+    .file-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .file-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      background: rgba(50, 50, 70, 0.8);
+    }
+
+    .file-link {
+      color: #1ce7e7;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .file-link:hover {
+      color: #4eff0b;
+    }
+
+    .file-icon {
+      font-size: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .file-link:hover .file-icon {
+      transform: scale(1.2);
+    }
+
+    /* ===== BUTTON ===== */
+    .btn {
+      display: inline-block;
+      padding: clamp(12px, 2vw, 16px) clamp(24px, 3vw, 32px);
+      border-radius: 50px;
+      font-size: clamp(1rem, 1.1vw, 1.2rem);
+      font-weight: bold;
+      text-decoration: none;
+      margin: 10px;
+      transition: all 0.2s ease;
+      min-width: 180px;
+      max-width: 100%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      background: linear-gradient(45deg, #4CAF50, #2196F3);
+      color: white;
+      opacity: 0;
+      animation: fadeIn 0.3s ease-out 0.7s forwards;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    /* ===== MEDIA QUERIES ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .content-box {
+        padding: 15px;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="container">
+  <h1>
+    <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
+         alt="HellonaGR"
+         class="profile-img">
+    <br>
+    HellonaGR
+  </h1>
+  <h2>Files & blog</h2>
 
+  <div class="content-box">
+    <div class="file-card">
+      <a href="warden-seed.html" class="file-link">
+        <span class="file-icon">📁</span>
+        <span>Warden Seed</span>
+      </a>
+    </div>
 
+    <div class="file-card">
+      <a href="#" class="file-link">
+        <span class="file-icon">📁</span>
+        <span>Coming Soon</span>
+      </a>
+    </div>
+
+    <div class="file-card">
+      <a href="#" class="file-link">
+        <span class="file-icon">📁</span>
+        <span>More Files</span>
+      </a>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn">
+    Επιστροφή στην Αρχική
+  </a>
+</div>
 </body>
 </html>

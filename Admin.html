@@ -3,279 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HellonaGR Admin Suite</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>HellonaGR Blog</title>
     <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --danger: #ff4b2b;
-            --success: #4CAF50;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-        }
-
-        /* Modern Glass Morphism Design */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('https://hellonagr.github.io/hellonagr/warden-seed') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
             margin: 0;
-            color: white;
-            overflow-x: hidden;
-            backdrop-filter: blur(5px);
+            padding: 0;
+            min-height: 100vh;
         }
-
         .container {
-            max-width: 1200px;
-            margin: 2rem auto;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.18);
         }
-
-        /* Tabs System */
-        .tabs {
-            display: flex;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .tab {
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.3s ease;
-        }
-
-        .tab.active {
-            background: rgba(255, 255, 255, 0.2);
-            border-bottom: 3px solid var(--success);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.2);
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(38, 117, 252, 0.3);
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 16px;
-        }
-
-        .btn i {
-            font-size: 14px;
-        }
-
-        .btn-primary {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Error Handling */
-        .error-message {
-            color: #ff6b6b;
-            margin-top: 8px;
-            font-size: 14px;
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-
-        /* Preview Section */
-        .preview-container {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
+        .post {
+            background: rgba(255, 255, 255, 0.1);
             padding: 1.5rem;
+            margin-bottom: 1rem;
             border-radius: 8px;
-            margin-top: 1rem;
-            min-height: 200px;
-            background: rgba(0, 0, 0, 0.1);
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-                margin: 1rem;
-            }
-            
-            .tabs {
-                flex-direction: column;
-            }
+        #loginBtn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center; margin-bottom: 2rem;">
-            <i class="fas fa-cogs"></i> HellonaGR Admin Suite
-        </h1>
-
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('auth')">
-                <i class="fas fa-user-shield"></i> Authentication
+        <h1>HellonaGR Blog</h1>
+        <button id="loginBtn">Login</button>
+        
+        <div id="posts">
+            <!-- Posts will load here -->
+            <div class="post">
+                <h2>Δείγμα Άρθρου</h2>
+                <p>Αυτό είναι ένα δείγμα άρθρου. Θα φορτώνονται αυτόματα από το Firebase.</p>
             </div>
-            <div class="tab" onclick="switchTab('pageCreator')">
-                <i class="fas fa-file-code"></i> Page Creator
-            </div>
-            <div class="tab" onclick="switchTab('settings')">
-                <i class="fas fa-cog"></i> Settings
-            </div>
-        </div>
-
-        <!-- Authentication Tab -->
-        <div id="auth" class="tab-content active">
-            <div id="loginForm">
-                <h2><i class="fas fa-sign-in-alt"></i> Admin Login</h2>
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" id="email" placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="password"><i class="fas fa-lock"></i> Password</label>
-                    <input type="password" id="password" placeholder="••••••••">
-                </div>
-                <div id="authError" class="error-message"></div>
-                <button class="btn btn-primary" onclick="login()">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-            </div>
-
-            <div id="adminPanel" style="display: none;">
-                <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
-                <p>Welcome back, <span id="adminName">Admin</span>!</p>
-                
-                <div class="form-group">
-                    <button class="btn btn-danger" onclick="logout()">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page Creator Tab -->
-        <div id="pageCreator" class="tab-content">
-            <h2><i class="fas fa-magic"></i> Custom Page Creator</h2>
-            
-            <div class="form-group">
-                <label for="pageTitle"><i class="fas fa-heading"></i> Page Title</label>
-                <input type="text" id="pageTitle" placeholder="My Awesome Page">
-            </div>
-            
-            <div class="form-group">
-                <label for="pageBackground"><i class="fas fa-image"></i> Background Image URL</label>
-                <input type="text" id="pageBackground" placeholder="https://example.com/image.jpg">
-            </div>
-            
-            <div class="form-group">
-                <label for="pageContent"><i class="fas fa-code"></i> HTML Content</label>
-                <textarea id="pageContent" rows="8" placeholder="<h1>Hello World!</h1>"></textarea>
-            </div>
-            
-            <button class="btn btn-secondary" onclick="previewPage()">
-                <i class="fas fa-eye"></i> Preview
-            </button>
-            
-            <button class="btn btn-primary" onclick="generatePage()">
-                <i class="fas fa-file-download"></i> Generate HTML
-            </button>
-            
-            <div id="pagePreview" class="preview-container">
-                <p>Preview will appear here...</p>
-            </div>
-        </div>
-
-        <!-- Settings Tab -->
-        <div id="settings" class="tab-content">
-            <h2><i class="fas fa-sliders-h"></i> Customization Settings</h2>
-            
-            <div class="form-group">
-                <label for="customTitle"><i class="fas fa-heading"></i> Site Title</label>
-                <input type="text" id="customTitle" placeholder="HellonaGR">
-            </div>
-            
-            <div class="form-group">
-                <label for="customCSS"><i class="fas fa-paint-brush"></i> Custom CSS</label>
-                <textarea id="customCSS" rows="8" placeholder="body { background: #1a1a2e; }"></textarea>
-            </div>
-            
-            <button class="btn btn-primary" onclick="saveSettings()">
-                <i class="fas fa-save"></i> Save Settings
-            </button>
         </div>
     </div>
 
+    <!-- Firebase & App Code -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    
     <script>
-        // Firebase Configuration
+        // Firebase Config (Αντικαταστήστε με τα ΔΙΚΑ ΣΑΣ Στοιχεία)
         const firebaseConfig = {
             authDomain: "hellonagr-blog.firebaseapp.com",
             databaseURL: "https://hellonagr-blog.firebaseio.com",
@@ -283,174 +62,55 @@
             storageBucket: "hellonagr-blog.firebasestorage.app",
             messagingSenderId: "179363558433",
             appId: "1:179363558433:web:08fe5fe2e18d5f3cd5df60"
-        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const database = firebase.database();
 
-        // Tab System
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        }
-
-        // Login Function with Enhanced Error Handling
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorElement = document.getElementById('authError');
-            
-            // Reset error
-            errorElement.textContent = '';
-            
-            // Validation
-            if (!email || !password) {
-                errorElement.textContent = 'Please fill all fields!';
-                return;
-            }
+        // Login Function
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const email = prompt("Email:");
+            const password = prompt("Password:");
             
             auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Success
-                    document.getElementById('loginForm').style.display = 'none';
-                    document.getElementById('adminPanel').style.display = 'block';
-                    document.getElementById('adminName').textContent = email;
+                .then(() => {
+                    alert("Επιτυχής σύνδεση!");
+                    loadPosts();
                 })
-                .catch((error) => {
-                    // Enhanced error messages
-                    let message = '';
-                    switch(error.code) {
-                        case 'auth/invalid-email':
-                            message = 'Invalid email format';
-                            break;
-                        case 'auth/user-not-found':
-                            message = 'User not found';
-                            break;
-                        case 'auth/wrong-password':
-                            message = 'Incorrect password';
-                            break;
-                        default:
-                            message = error.message;
-                    }
-                    errorElement.textContent = message;
+                .catch(error => {
+                    console.error("Σφάλμα:", error);
+                    alert("Λάθος email/password!");
+                });
+        });
+
+        // Load Posts
+        function loadPosts() {
+            database.ref('posts').once('value')
+                .then(snapshot => {
+                    const posts = snapshot.val() || {};
+                    let html = '';
+                    
+                    Object.keys(posts).forEach(key => {
+                        html += `
+                            <div class="post">
+                                <h2>${posts[key].title}</h2>
+                                <p>${posts[key].content}</p>
+                            </div>
+                        `;
+                    });
+                    
+                    document.getElementById('posts').innerHTML = html;
                 });
         }
 
-        // Logout
-        function logout() {
-            auth.signOut().then(() => {
-                window.location.reload();
-            });
-        }
-
-        // Page Creator Functions
-        function previewPage() {
-            const title = document.getElementById('pageTitle').value || 'Untitled Page';
-            const background = document.getElementById('pageBackground').value || '';
-            const content = document.getElementById('pageContent').value || '<p>No content yet</p>';
-            
-            const preview = `
-                <h2>${title}</h2>
-                <div style="margin: 1rem 0; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                    ${content}
-                </div>
-                <small>Background: ${background || 'None'}</small>
-            `;
-            
-            document.getElementById('pagePreview').innerHTML = preview;
-        }
-
-        function generatePage() {
-            const title = document.getElementById('pageTitle').value || 'Untitled Page';
-            const background = document.getElementById('pageBackground').value;
-            const content = document.getElementById('pageContent').value;
-            
-            const htmlTemplate = `
-<!DOCTYPE html>
-<html lang="el">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title}</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: ${background ? `url('${background}')` : '#1a1a2e'};
-            background-size: cover;
-            color: white;
-            margin: 0;
-            padding: 2rem;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(0,0,0,0.7);
-            padding: 2rem;
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        ${content}
-    </div>
-</body>
-</html>
-            `;
-            
-            // Create download link
-            const blob = new Blob([htmlTemplate], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${title.toLowerCase().replace(/\s+/g, '-')}.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
-        // Settings Functions
-        function saveSettings() {
-            const title = document.getElementById('customTitle').value;
-            const customCSS = document.getElementById('customCSS').value;
-            
-            // Save to Firebase or localStorage
-            localStorage.setItem('siteTitle', title);
-            localStorage.setItem('customCSS', customCSS);
-            
-            alert('Settings saved!');
-        }
-
-        // Load saved settings
-        function loadSettings() {
-            const title = localStorage.getItem('siteTitle');
-            const css = localStorage.getItem('customCSS');
-            
-            if (title) document.getElementById('customTitle').value = title;
-            if (css) document.getElementById('customCSS').value = css;
-        }
-
-        // Check auth state
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                document.getElementById('adminName').textContent = user.email;
-            }
+        // Debugging
+        console.log("Firebase initialized:", firebase.app().name);
+        auth.onAuthStateChanged(user => {
+            console.log("User state:", user ? "Logged in" : "Logged out");
         });
-
-        // Initialize
-        loadSettings();
     </script>
 </body>
 </html>
+          
+     

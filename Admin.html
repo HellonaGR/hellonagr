@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin - HellonaGR</title>
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    
+    <style>
+        /* Βασικά styles όπως πριν */
+        
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #edf2f4;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #4a4e69;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        button {
+            background: #4a4e69;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #2b2d42;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <div class="container" id="adminContainer">
+        <h1>Blog Admin Panel</h1>
+        
+        <div id="loginForm" class="login-form">
+            <h2>Σύνδεση</h2>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Κωδικός:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button onclick="login()">Σύνδεση</button>
+            <div id="errorMessage" class="error-message"></div>
+            
+            <!-- Μόνο για πρώτη φορά (για να δημιουργήσετε τον admin) -->
+            <div style="margin-top: 20px; border-top: 1px solid #4a4e69; padding-top: 20px;">
+                <h3>Δημιουργία Λογαριασμού</h3>
+                <div class="form-group">
+                    <label for="newUsername">Username:</label>
+                    <input type="text" id="newUsername">
+                </div>
+                <div class="form-group">
+                    <label for="newEmail">Email:</label>
+                    <input type="email" id="newEmail">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Κωδικός (min 6 χαρακτήρες):</label>
+                    <input type="password" id="newPassword">
+                </div>
+                <button onclick="createAccount()">Δημιουργία Λογαριασμού</button>
+            </div>
+        </div>
+        
+        <div id="adminPanel" style="display:none;">
+            <div class="admin-container">
+                <h2>Δημιουργία Νέου Άρθρου</h2>
+                <div class="form-group">
+                    <label for="postTitle">Τίτλος:</label>
+                    <input type="text" id="postTitle">
+                </div>
+                
+                <div class="form-group">
+                    <label for="postImage">Εικόνα (URL):</label>
+                    <input type="text" id="postImage" placeholder="https://example.com/image.jpg">
+                    <img id="imagePreview" class="preview-image" alt="Preview">
+                </div>
+                
+                <div class="form-group">
+                    <label for="imageAlt">Εναλλακτικό Κείμενο Εικόνας:</label>
+                    <input type="text" id="imageAlt">
+                </div>
+                
+                <div class="form-group">
+                    <label for="imageCaption">Λεζάντα Εικόνας:</label>
+                    <input type="text" id="imageCaption">
+                </div>
+                
+                <div class="form-group">
+                    <label for="postContent">Περιεχόμενο:</label>
+                    <textarea id="postContent" rows="6"></textarea>
+                </div>
+                
+                <button onclick="addPost()">Δημοσίευση</button>
+            </div>
+            
+            <div class="admin-container" style="margin-top: 30px;">
+                <h2>Υπάρχοντα Άρθρα</h2>
+                <div id="existingPosts"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="logout()" style="background: #ff0000;">Αποσύνδεση</button>
+                <a href="blog.html" class="btn btn-home">Πίσω στο Blog</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration - Αντικαταστήστε με τα δικά σας στοιχεία
+        const firebaseConfig = {
+            apiKey: "AIzaSyBYvWQriu1mr_5Mfcqpu23dyk0vHlIhvA8",
+            authDomain: "hellonagr-blog.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "hellonagr-blog",
+            storageBucket: "hellonagr-blog.firebasestorage.app",
+            messagingSenderId: "179363558433",
+            appId: "1:179363558433:web:08fe5fe2e18d5f3cd5df60"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+
+        // Preview εικόνας
+        document.getElementById('postImage').addEventListener('input', function() {
+            const preview = document.getElementById('imagePreview');
+            if(this.value) {
+                preview.src = this.value;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+        
+        // Δημιουργία λογαριασμού
+        function createAccount() {
+            const username = document.getElementById('newUsername').value;
+            const email = document.getElementById('newEmail').value;
+            const password = document.getElementById('newPassword').value;
+            const errorElement = document.getElementById('errorMessage');
+            
+            if(!username || !email || !password) {
+                errorElement.textContent = 'Συμπληρώστε όλα τα πεδία!';
+                return;
+            }
+            
+            if(password.length < 6) {
+                errorElement.textContent = 'Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες!';
+                return;
+            }
+            
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Αποθήκευση του username στη βάση δεδομένων
+                    const user = userCredential.user;
+                    return database.ref('users/' + user.uid).set({
+                        username: username,
+                        email: email,
+                        role: 'admin' // Μπορείτε να προσθέσετε ρόλους
+                    });
+                })
+                .then(() => {
+                    alert('Ο λογαριασμός δημιουργήθηκε επιτυχώς! Μπορείτε τώρα να συνδεθείτε.');
+                    document.getElementById('newUsername').value = '';
+                    document.getElementById('newEmail').value = '';
+                    document.getElementById('newPassword').value = '';
+                    errorElement.textContent = '';
+                })
+                .catch((error) => {
+                    errorElement.textContent = error.message;
+                });
+        }
+        
+        // Σύνδεση χρήστη
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('errorMessage');
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    // Επιτυχής σύνδεση
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    loadExistingPosts();
+                    errorElement.textContent = '';
+                })
+                .catch((error) => {
+                    errorElement.textContent = error.message;
+                });
+        }
+        
+        // Αποσύνδεση
+        function logout() {
+            auth.signOut().then(() => {
+                window.location.reload();
+            });
+        }
+        
+        // Φόρτωση υπαρχόντων posts
+        function loadExistingPosts() {
+            database.ref('posts').once('value')
+                .then((snapshot) => {
+                    const posts = snapshot.val() || [];
+                    const container = document.getElementById('existingPosts');
+                    
+                    if(posts.length === 0) {
+                        container.innerHTML = '<p>Δεν υπάρχουν άρθρα ακόμη.</p>';
+                    } else {
+                        // Μετατροπή από Firebase object σε array
+                        const postsArray = Object.keys(posts).map(key => ({
+                            id: key,
+                            ...posts[key]
+                        }));
+                        
+                        container.innerHTML = postsArray.map(post => `
+                            <div class="post" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #4a4e69;">
+                                <h3>${post.title}</h3>
+                                <small>${post.date} • Δημοσιεύτηκε από: ${post.author || 'Admin'}</small>
+                                ${post.image ? `<img src="${post.image}" style="max-width: 100px; display: block; margin: 10px 0;">` : ''}
+                                <button onclick="deletePost('${post.id}')" style="background: #ff0000; margin-top: 10px;">Διαγραφή</button>
+                            </div>
+                        `).join('');
+                    }
+                });
+        }
+        
+        // Προσθήκη νέου post
+        function addPost() {
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const image = document.getElementById('postImage').value;
+            const imageAlt = document.getElementById('imageAlt').value;
+            const imageCaption = document.getElementById('imageCaption').value;
+            
+            if(!title || !content) {
+                alert('Συμπληρώστε τίτλο και περιεχόμενο!');
+                return;
+            }
+            
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Δεν είστε συνδεδεμένος!');
+                return;
+            }
+            
+            // Δημιουργία νέου post στη βάση δεδομένων
+            const newPostRef = database.ref('posts').push();
+            
+            newPostRef.set({
+                title,
+                content,
+                date: new Date().toLocaleDateString('el-GR'),
+                image: image || null,
+                imageAlt: imageAlt || null,
+                imageCaption: imageCaption || null,
+                author: user.displayName || 'HellonaGR',
+                timestamp: firebase.database.ServerValue.TIMESTAMP
+            })
+            .then(() => {
+                alert('Το άρθρο δημοσιεύτηκε επιτυχώς!');
+                
+                // Καθαρισμός φόρμας
+                document.getElementById('postTitle').value = '';
+                document.getElementById('postContent').value = '';
+                document.getElementById('postImage').value = '';
+                document.getElementById('imageAlt').value = '';
+                document.getElementById('imageCaption').value = '';
+                document.getElementById('imagePreview').style.display = 'none';
+                
+                // Ενημέρωση λίστας
+                loadExistingPosts();
+            })
+            .catch((error) => {
+                alert('Σφάλμα: ' + error.message);
+            });
+        }
+        
+        // Διαγραφή post
+        function deletePost(postId) {
+            if(confirm('Είστε σίγουρος ότι θέλετε να διαγράψετε αυτό το άρθρο;')) {
+                database.ref('posts/' + postId).remove()
+                    .then(() => {
+                        loadExistingPosts();
+                    })
+                    .catch((error) => {
+                        alert('Σφάλμα: ' + error.message);
+                    });
+            }
+        }
+        
+        // Έλεγχος κατάστασης σύνδεσης
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // Ο χρήστης είναι συνδεδεμένος
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadExistingPosts();
+                
+                // Αν θέλετε να εμφανίζεται το username
+                database.ref('users/' + user.uid).once('value')
+                    .then((snapshot) => {
+                        const userData = snapshot.val();
+                        if (userData && userData.username) {
+                            document.querySelector('h1').textContent += ` - ${userData.username}`;
+                        }
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

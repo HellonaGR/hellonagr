@@ -3,120 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HellonaGR Blog</title>
+    <title>HellonaGR - Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --text: #333;
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* Header */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            font-size: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Κύριο Περιεχόμενο */
-        .container {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .page-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary);
-            position: relative;
-        }
-
-        .page-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--secondary);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
-        }
-
-        /* Άρθρα */
+        /* Επιπλέον styles για το blog */
         .post {
             background: white;
             border-radius: 10px;
@@ -189,94 +80,39 @@
         .read-more:hover i {
             transform: translateX(3px);
         }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--secondary);
-        }
-
-        .copyright {
-            margin-top: 1rem;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .post {
-                padding: 1.5rem;
-            }
-            
-            .post-title {
-                font-size: 1.5rem;
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="#" class="logo">
-                <i class="fas fa-blog"></i>
-                HellonaGR
+            <a href="index.html" class="logo-container">
+                <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj" 
+                     alt="HellonaGR Logo" class="logo-img">
+                <span class="logo-text">HellonaGR</span>
             </a>
             <div class="nav-links">
-                <a href="https://hellonagr.github.io/hellonagr/">Αρχική</a>
-                <a href="https://hellonagr.github.io/hellonagr/Blog">Άρθρα</a>
-                <a href="https://hellonagr.github.io/hellonagr/epikinonia">Επικοινωνία</a>
+                <a href="index.html">Αρχική</a>
+                <a href="blog.html">Blog</a>
+                <a href="epikinonia.html">Επικοινωνία</a>
             </div>
         </nav>
     </header>
 
     <div class="container">
-        <h1 class="page-title fade-in">Τελευταία Άρθρα</h1>
+        <h1 class="page-title fade-in">Το Blog μου</h1>
         
         <div id="posts">
             <!-- Άρθρο 1 -->
             <article class="post fade-in">
-                <h2 class="post-title">4 village seed!!!</h2>
+                <h2 class="post-title">Τίτλος Πρώτου Άρθρου</h2>
                 <div class="post-meta">
-                    <i class="far fa-calendar-alt"></i>                </div>
-                <div class="post-content">
-                    <p>Αυτό είναι ένα minecraft java edition seed 1.21+ που σε κάνει spawn ανάμεσα σε 4 village.</p>
+                    <i class="far fa-calendar-alt"></i>
+                    Δημοσιεύτηκε στις 1 Ιανουαρίου 2023
                 </div>
-                <a href="https://hellonagr.github.io/hellonagr/4villageseed" class="read-more">
+                <div class="post-content">
+                    <p>Αυτό είναι ένα δείγμα περιεχομένου για το πρώτο άρθρο. Μπορείτε να γράψετε εδώ ό,τι θέλετε να μοιραστείτε με τους αναγνώστες σας.</p>
+                </div>
+                <a href="#" class="read-more">
                     Διαβάστε Περισσότερα
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -284,15 +120,15 @@
 
             <!-- Άρθρο 2 -->
             <article class="post fade-in">
-                <h2 class="post-title">Ancient city seed</h2>
+                <h2 class="post-title">Δεύτερο Ενδιαφέρον Άρθρο</h2>
                 <div class="post-meta">
                     <i class="far fa-calendar-alt"></i>
-                    Δημοσιεύτηκε στις δέν θυμάμαι!
+                    Δημοσιεύτηκε στις 15 Φεβρουαρίου 2023
                 </div>
                 <div class="post-content">
-                    <p>Σε αυτό το seed στην 1.21+ σας κάνει spawn σε ένα ancient city στο Y-17!!!</p>
+                    <p>Εδώ μπορείτε να βάλετε το περιεχόμενο του δεύτερου άρθρου. Χρησιμοποιήστε παραγράφους, λίστες και άλλα στοιχεία για να οργανώσετε το κείμενό σας.</p>
                 </div>
-                <a href="https://hellonagr.github.io/hellonagr/warden-seed" class="read-more">
+                <a href="#" class="read-more">
                     Διαβάστε Περισσότερα
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -301,20 +137,18 @@
     </div>
 
     <footer>
-        <div class="social-links"
-            <a href="https://www.youtube.com/channel/UCp4wzvJj6eeWvT9F-UIVAgg"><i class="fab fa-youtube"></i></a>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
         </div>
-        <p>HellonaGR Blog</p>
-        <p class="copyright">© 2025 Όλα τα δικαιώματα διατηρούνται</p>
+        <p class="copyright">© 2023 HellonaGR. Όλα τα δικαιώματα διατηρούνται.</p>
     </footer>
 
     <script>
-        // Απλή λειτουργία για fade-in animations
         document.addEventListener('DOMContentLoaded', () => {
             const posts = document.querySelectorAll('.post');
-            
             posts.forEach((post, index) => {
-                // Προσθέτουμε καθυστέρηση για σταδιακή εμφάνιση
                 post.style.animationDelay = `${index * 0.1}s`;
             });
         });

@@ -3,171 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Admin - HellonaGR</title>
-    <!-- Add Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
-    
+    <title>Admin Panel - HellonaGR</title>
     <style>
-        /* Βασικά styles όπως πριν */
-        
-        .admin-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            margin-top: 30px;
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --danger: #ff4b2b;
+            --success: #4CAF50;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
         }
         
+        /* Modern Gradient Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: white;
+            overflow-x: hidden;
+            animation: gradientShift 15s ease infinite;
+            background-size: 400% 400%;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating Bubbles */
+        .bubble {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: floatBubble 15s infinite ease-in-out;
+            z-index: 0;
+        }
+        
+        @keyframes floatBubble {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        /* Main Container */
+        .admin-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Form Elements */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #edf2f4;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
         }
         
         input, textarea, select {
             width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #4a4e69;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.2);
             background: rgba(255,255,255,0.1);
             color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
         
-        button {
-            background: #4a4e69;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none;
+            font-size: 16px;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
         }
         
-        button:hover {
-            background: #2b2d42;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
         
-        .preview-image {
+        .btn-primary {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Posts List */
+        .post-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+            transition: all 0.3s ease;
+        }
+        
+        .post-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+        
+        /* Preview Image */
+        .image-preview {
             max-width: 100%;
             max-height: 200px;
+            border-radius: 8px;
             margin-top: 10px;
             display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 2px solid white;
         }
         
-        .login-form {
-            max-width: 400px;
-            margin: 100px auto;
-        }
-        
-        .error-message {
-            color: #ff6b6b;
-            margin-top: 10px;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+                margin: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background Elements -->
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
-    <div class="container" id="adminContainer">
-        <h1>Blog Admin Panel</h1>
+    <!-- Background Bubbles -->
+    <div class="bubble" style="width: 150px; height: 150px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 200px; height: 200px; bottom: 15%; right: 5%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 100px; height: 100px; top: 50%; left: 20%; animation-delay: 4s;"></div>
+    
+    <div class="admin-container">
+        <h1 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+            🛠️ Admin Panel
+        </h1>
         
-        <div id="loginForm" class="login-form">
-            <h2>Σύνδεση</h2>
+        <div id="loginForm">
+            <h2 style="text-align: center; color: white; margin-bottom: 1.5rem;">🔐 Σύνδεση</h2>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" required>
+                <input type="email" id="email" required placeholder="hellonagr@example.com">
             </div>
             <div class="form-group">
                 <label for="password">Κωδικός:</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" required placeholder="••••••••">
             </div>
-            <button onclick="login()">Σύνδεση</button>
-            <div id="errorMessage" class="error-message"></div>
-            
-            <!-- Μόνο για πρώτη φορά (για να δημιουργήσετε τον admin) -->
-            <div style="margin-top: 20px; border-top: 1px solid #4a4e69; padding-top: 20px;">
-                <h3>Δημιουργία Λογαριασμού</h3>
-                <div class="form-group">
-                    <label for="newUsername">Username:</label>
-                    <input type="text" id="newUsername">
-                </div>
-                <div class="form-group">
-                    <label for="newEmail">Email:</label>
-                    <input type="email" id="newEmail">
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Κωδικός (min 6 χαρακτήρες):</label>
-                    <input type="password" id="newPassword">
-                </div>
-                <button onclick="createAccount()">Δημιουργία Λογαριασμού</button>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="login()">Σύνδεση</button>
             </div>
+            <p id="errorMessage" style="color: #ff6b6b; text-align: center; margin-top: 1rem;"></p>
         </div>
         
-        <div id="adminPanel" style="display:none;">
-            <div class="admin-container">
-                <h2>Δημιουργία Νέου Άρθρου</h2>
+        <div id="adminPanel" style="display: none;">
+            <!-- New Post Form -->
+            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                <h2 style="margin-top: 0;">📝 Δημιουργία Νέου Άρθρου</h2>
                 <div class="form-group">
                     <label for="postTitle">Τίτλος:</label>
-                    <input type="text" id="postTitle">
+                    <input type="text" id="postTitle" placeholder="Γράψτε έναν τίτλο...">
                 </div>
                 
                 <div class="form-group">
-                    <label for="postImage">Εικόνα (URL):</label>
+                    <label for="postImage">URL Εικόνας:</label>
                     <input type="text" id="postImage" placeholder="https://example.com/image.jpg">
-                    <img id="imagePreview" class="preview-image" alt="Preview">
-                </div>
-                
-                <div class="form-group">
-                    <label for="imageAlt">Εναλλακτικό Κείμενο Εικόνας:</label>
-                    <input type="text" id="imageAlt">
-                </div>
-                
-                <div class="form-group">
-                    <label for="imageCaption">Λεζάντα Εικόνας:</label>
-                    <input type="text" id="imageCaption">
+                    <img id="imagePreview" class="image-preview" alt="Προεπισκόπηση">
                 </div>
                 
                 <div class="form-group">
                     <label for="postContent">Περιεχόμενο:</label>
-                    <textarea id="postContent" rows="6"></textarea>
+                    <textarea id="postContent" rows="6" placeholder="Γράψτε το περιεχόμενο του άρθρου..."></textarea>
                 </div>
                 
-                <button onclick="addPost()">Δημοσίευση</button>
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" onclick="addPost()">📤 Δημοσίευση</button>
+                </div>
             </div>
             
-            <div class="admin-container" style="margin-top: 30px;">
-                <h2>Υπάρχοντα Άρθρα</h2>
-                <div id="existingPosts"></div>
+            <!-- Existing Posts -->
+            <h2>📚 Υπάρχοντα Άρθρα</h2>
+            <div id="existingPosts" style="margin-top: 1rem;">
+                <p>Φόρτωση άρθρων...</p>
             </div>
             
-            <div style="text-align: center; margin-top: 30px;">
-                <button onclick="logout()" style="background: #ff0000;">Αποσύνδεση</button>
-                <a href="blog.html" class="btn btn-home">Πίσω στο Blog</a>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-danger" onclick="logout()">🚪 Αποσύνδεση</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Firebase Configuration - Αντικαταστήστε με τα δικά σας στοιχεία
+        // Firebase Configuration (αντικαταστήστε με τα δικά σας)
         const firebaseConfig = {
-            apiKey: "AIzaSyBYvWQriu1mr_5Mfcqpu23dyk0vHlIhvA8",
-            authDomain: "hellonagr-blog.firebaseapp.com",
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
             databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-            projectId: "hellonagr-blog",
-            storageBucket: "hellonagr-blog.firebasestorage.app",
-            messagingSenderId: "179363558433",
-            appId: "1:179363558433:web:08fe5fe2e18d5f3cd5df60"
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
         // Initialize Firebase
@@ -175,7 +257,7 @@
         const auth = firebase.auth();
         const database = firebase.database();
 
-        // Preview εικόνας
+        // Image Preview
         document.getElementById('postImage').addEventListener('input', function() {
             const preview = document.getElementById('imagePreview');
             if(this.value) {
@@ -185,47 +267,8 @@
                 preview.style.display = 'none';
             }
         });
-        
-        // Δημιουργία λογαριασμού
-        function createAccount() {
-            const username = document.getElementById('newUsername').value;
-            const email = document.getElementById('newEmail').value;
-            const password = document.getElementById('newPassword').value;
-            const errorElement = document.getElementById('errorMessage');
-            
-            if(!username || !email || !password) {
-                errorElement.textContent = 'Συμπληρώστε όλα τα πεδία!';
-                return;
-            }
-            
-            if(password.length < 6) {
-                errorElement.textContent = 'Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες!';
-                return;
-            }
-            
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Αποθήκευση του username στη βάση δεδομένων
-                    const user = userCredential.user;
-                    return database.ref('users/' + user.uid).set({
-                        username: username,
-                        email: email,
-                        role: 'admin' // Μπορείτε να προσθέσετε ρόλους
-                    });
-                })
-                .then(() => {
-                    alert('Ο λογαριασμός δημιουργήθηκε επιτυχώς! Μπορείτε τώρα να συνδεθείτε.');
-                    document.getElementById('newUsername').value = '';
-                    document.getElementById('newEmail').value = '';
-                    document.getElementById('newPassword').value = '';
-                    errorElement.textContent = '';
-                })
-                .catch((error) => {
-                    errorElement.textContent = error.message;
-                });
-        }
-        
-        // Σύνδεση χρήστη
+
+        // Login Function
         function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -233,132 +276,87 @@
             
             auth.signInWithEmailAndPassword(email, password)
                 .then(() => {
-                    // Επιτυχής σύνδεση
                     document.getElementById('loginForm').style.display = 'none';
                     document.getElementById('adminPanel').style.display = 'block';
                     loadExistingPosts();
-                    errorElement.textContent = '';
                 })
                 .catch((error) => {
                     errorElement.textContent = error.message;
+                    errorElement.style.animation = 'shake 0.5s';
+                    setTimeout(() => errorElement.style.animation = '', 500);
                 });
         }
-        
-        // Αποσύνδεση
-        function logout() {
-            auth.signOut().then(() => {
-                window.location.reload();
-            });
-        }
-        
-        // Φόρτωση υπαρχόντων posts
+
+        // Load Posts
         function loadExistingPosts() {
             database.ref('posts').once('value')
                 .then((snapshot) => {
-                    const posts = snapshot.val() || [];
+                    const posts = snapshot.val() || {};
                     const container = document.getElementById('existingPosts');
                     
-                    if(posts.length === 0) {
-                        container.innerHTML = '<p>Δεν υπάρχουν άρθρα ακόμη.</p>';
+                    if(Object.keys(posts).length === 0) {
+                        container.innerHTML = '<p>Δεν βρέθηκαν άρθρα.</p>';
                     } else {
-                        // Μετατροπή από Firebase object σε array
-                        const postsArray = Object.keys(posts).map(key => ({
-                            id: key,
-                            ...posts[key]
-                        }));
-                        
-                        container.innerHTML = postsArray.map(post => `
-                            <div class="post" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #4a4e69;">
-                                <h3>${post.title}</h3>
-                                <small>${post.date} • Δημοσιεύτηκε από: ${post.author || 'Admin'}</small>
-                                ${post.image ? `<img src="${post.image}" style="max-width: 100px; display: block; margin: 10px 0;">` : ''}
-                                <button onclick="deletePost('${post.id}')" style="background: #ff0000; margin-top: 10px;">Διαγραφή</button>
+                        container.innerHTML = Object.keys(posts).map(key => `
+                            <div class="post-item">
+                                <h3>${posts[key].title}</h3>
+                                <p><small>${posts[key].date}</small></p>
+                                <button class="btn btn-danger" onclick="deletePost('${key}')">Διαγραφή</button>
                             </div>
                         `).join('');
                     }
                 });
         }
-        
-        // Προσθήκη νέου post
+
+        // Add New Post
         function addPost() {
             const title = document.getElementById('postTitle').value;
             const content = document.getElementById('postContent').value;
             const image = document.getElementById('postImage').value;
-            const imageAlt = document.getElementById('imageAlt').value;
-            const imageCaption = document.getElementById('imageCaption').value;
             
             if(!title || !content) {
                 alert('Συμπληρώστε τίτλο και περιεχόμενο!');
                 return;
             }
             
-            const user = auth.currentUser;
-            if (!user) {
-                alert('Δεν είστε συνδεδεμένος!');
-                return;
-            }
-            
-            // Δημιουργία νέου post στη βάση δεδομένων
             const newPostRef = database.ref('posts').push();
-            
             newPostRef.set({
                 title,
                 content,
-                date: new Date().toLocaleDateString('el-GR'),
                 image: image || null,
-                imageAlt: imageAlt || null,
-                imageCaption: imageCaption || null,
-                author: user.displayName || 'HellonaGR',
+                date: new Date().toLocaleDateString('el-GR'),
                 timestamp: firebase.database.ServerValue.TIMESTAMP
-            })
-            .then(() => {
-                alert('Το άρθρο δημοσιεύτηκε επιτυχώς!');
-                
-                // Καθαρισμός φόρμας
+            }).then(() => {
+                alert('Το άρθρο δημοσιεύτηκε!');
                 document.getElementById('postTitle').value = '';
                 document.getElementById('postContent').value = '';
                 document.getElementById('postImage').value = '';
-                document.getElementById('imageAlt').value = '';
-                document.getElementById('imageCaption').value = '';
                 document.getElementById('imagePreview').style.display = 'none';
-                
-                // Ενημέρωση λίστας
                 loadExistingPosts();
-            })
-            .catch((error) => {
-                alert('Σφάλμα: ' + error.message);
             });
         }
-        
-        // Διαγραφή post
+
+        // Delete Post
         function deletePost(postId) {
             if(confirm('Είστε σίγουρος ότι θέλετε να διαγράψετε αυτό το άρθρο;')) {
                 database.ref('posts/' + postId).remove()
-                    .then(() => {
-                        loadExistingPosts();
-                    })
-                    .catch((error) => {
-                        alert('Σφάλμα: ' + error.message);
-                    });
+                    .then(() => loadExistingPosts());
             }
         }
-        
-        // Έλεγχος κατάστασης σύνδεσης
+
+        // Logout
+        function logout() {
+            auth.signOut().then(() => {
+                window.location.reload();
+            });
+        }
+
+        // Check Auth State
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // Ο χρήστης είναι συνδεδεμένος
                 document.getElementById('loginForm').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 loadExistingPosts();
-                
-                // Αν θέλετε να εμφανίζεται το username
-                database.ref('users/' + user.uid).once('value')
-                    .then((snapshot) => {
-                        const userData = snapshot.val();
-                        if (userData && userData.username) {
-                            document.querySelector('h1').textContent += ` - ${userData.username}`;
-                        }
-                    });
             }
         });
     </script>

@@ -1,400 +1,64 @@
-<!DOCTYPE html>
-<html lang="el">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HellonaGR-blog</title>
-    <style>
-    
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-       body {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    background-image: url("back2.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-    color: #fff;
-    overflow-x: hidden;
-    position: relative;
-}
-
-body::before, body::after,
-.corner-effect-1, .corner-effect-2 {
-    content: '';
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-    border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.3;
-    z-index: -1;
-    animation: float 15s infinite linear;
-}
-
-body::before {
-    top: -150px;
-    left: -150px;
-    background: radial-gradient(circle, rgba(255,0,0,0.6) 0%, rgba(255,0,0,0) 70%);
-    animation-delay: 0s;
-}
-
-body::after {
-    bottom: -150px;
-    right: -150px;
-    background: radial-gradient(circle, rgba(0,0,255,0.6) 0%, rgba(0,0,255,0) 70%);
-    animation-delay: 3s;
-}
-
-.corner-effect-1 {
-    top: -150px;
-    right: -150px;
-    background: radial-gradient(circle, rgba(0,255,0,0.6) 0%, rgba(0,255,0,0) 70%);
-    animation-delay: 6s;
-}
-
-.corner-effect-2 {
-    bottom: -150px;
-    left: -150px;
-    background: radial-gradient(circle, rgba(255,255,0,0.6) 0%, rgba(255,255,0,0) 70%);
-    animation-delay: 9s;
-}
-
-@keyframes float {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.3;
-    }
-    50% {
-        transform: translate(20px, 20px) scale(1.2);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.3;
-    }
-}
-        }
-
-     
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-  
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: #fff;
-            text-shadow: 0 0 10px rgba(28, 231, 231, 0.7);
-            margin: 15px 0;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin: 20px 0;
-            color: #1ce7e7;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out 0.2s forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .profile-img {
-            width: clamp(120px, 25vw, 200px);
-            height: clamp(120px, 25vw, 200px);
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #4eff0b;
-            box-shadow: 0 0 20px rgba(78, 255, 11, 0.6);
-            opacity: 0;
-            animation: popIn 0.5s cubic-bezier(0.5, 1.5, 0.5, 1.5) 0.1s forwards;
-            transition: all 0.3s ease;
-        }
-
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            70% { transform: scale(1.1); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 0 30px rgba(78, 255, 11, 0.8);
-        }
-
-        /* ===== CONTENT BOX ===== */
-        .content-box {
-            background: rgba(30, 30, 50, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: clamp(20px, 3vw, 30px);
-            margin: 20px 0;
-            width: 100%;
-            max-width: 700px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(78, 255, 11, 0.3);
-            opacity: 0;
-            animation: slideUp 0.5s ease-out 0.3s forwards;
-            transition: all 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .content-box:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-     
-        .file-card {
-            position: relative;
-            background: rgba(40, 40, 60, 0.7);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 25px 0;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-left: 4px solid #4eff0b;
-            opacity: 0;
-            animation: fadeInSlideUp 0.5s ease-out forwards;
-            overflow: hidden;
-        }
-
-
-        .card-image-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            height: 100px;
-            gap: 10px;
-        }
-
-        .card-image {
-            width: 48%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid rgba(78, 255, 11, 0.5);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.5s ease;
-        }
-
-        .card-image.left {
-            animation: slideInLeft 0.5s ease-out 0.4s forwards;
-        }
-
-        .card-image.right {
-            animation: slideInRight 0.5s ease-out 0.5s forwards;
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px) translateY(-20px); }
-            to { opacity: 1; transform: translateX(0) translateY(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(30px) translateY(-20px); }
-            to { opacity: 1; transform: translateX(0) translateY(0); }
-        }
-
-        @keyframes fadeInSlideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .file-card:nth-child(1) { animation-delay: 0.4s; }
-        .file-card:nth-child(2) { animation-delay: 0.6s; }
-        .file-card:nth-child(3) { animation-delay: 0.8s; }
-
-        .file-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            background: rgba(50, 50, 70, 0.8);
-        }
-
-        .file-link {
-            color: #1ce7e7;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .file-link:hover {
-            color: #4eff0b;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .file-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .file-link:hover .file-icon {
-            transform: scale(1.3) rotate(10deg);
-        }
-
-    
-        .btn {
-            display: inline-block;
-            padding: clamp(12px, 2vw, 16px) clamp(24px, 3vw, 32px);
-            border-radius: 50px;
-            font-size: clamp(1rem, 1.1vw, 1.2rem);
-            font-weight: bold;
-            text-decoration: none;
-            margin: 10px;
-            transition: all 0.3s ease;
-            min-width: 180px;
-            max-width: 100%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            background: linear-gradient(45deg, #4CAF50, #2196F3);
-            color: white;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out 1s forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #2196F3, #4CAF50);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .btn:hover::after {
-            opacity: 1;
-        }
-
-        .btn:active {
-            transform: translateY(2px);
-        }
-
-      
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .content-box {
-                padding: 15px;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 280px;
-            }
-
-            .card-image-container {
-                height: 80px;
-            }
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h1>
-        <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
-             alt="HellonaGR"
-             class="profile-img">
-        <br>
-        HellonaGR
-    </h1>
-    <h2>Βlog</h2>
-
-    <div class="content-box">
-        <div class="file-card">
-            <div class="card-image-container">
-
-                <img src="warden-seed-1.webp" alt="Left Image" class="card-image left">
-                <img src="warden-seed-4.webp" alt="Right Image" class="card-image right">
-            </div>
-            <a href="warden-seed.html" class="file-link">
-                <span class="file-icon">Warden</span>
-                <span>Seed</span>
-            </a>
-        </div>
-
-        <div class="file-card">
-            <div class="card-image-container">
-
-                <img src="4villageseed-1.png" alt="Left Image" class="card-image left">
-                <img src="4villageseed-4.png" alt="Right Image" class="card-image right">
-            </div>
-            <a href="4villageseed.html" class="file-link">
-                <span class="file-icon">4</span>
-                <span> village seed στο spawn 1.21+</span>
-            </a>
-        </div>
-
-        <div class="file-card">
-            <div class="card-image-container">
-
-                
-            </a>
-        </div>
-    </div>
-
-    <a href="index.html" class="btn">
-        Επιστροφή στην Αρχική
-    </a>
-</div>
+<!-- Προσθέστε αυτό το script στην αρχή του <head> -->
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
 
 <script>
+    // Firebase Configuration (ίδια με το admin)
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+</script>
+
+<!-- Αντικαταστήστε το υπάρχον script με αυτό: -->
+<script>
+    // Φόρτωση των posts από Firebase
+    document.addEventListener('DOMContentLoaded', function() {
+        // Έλεγχος αν είναι admin (θα εμφανιστεί το κουμπί Admin αν είναι συνδεδεμένος)
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('adminBtn').style.display = 'inline-block';
+            }
         });
+
+        // Φόρτωση posts
+        database.ref('posts').once('value')
+            .then((snapshot) => {
+                const postsData = snapshot.val() || {};
+                const blogPostsContainer = document.getElementById('blogPosts');
+                
+                if(Object.keys(postsData).length === 0) {
+                    blogPostsContainer.innerHTML = '<div class="post"><p>Δεν υπάρχουν ακόμη άρθρα.</p></div>';
+                } else {
+                    // Μετατροπή από Firebase object σε array και ταξινόμηση κατά ημερομηνία
+                    const postsArray = Object.keys(postsData).map(key => ({
+                        id: key,
+                        ...postsData[key]
+                    })).sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    blogPostsContainer.innerHTML = postsArray.map(post => `
+                        <div class="post">
+                            <h3 class="post-title">${post.title}</h3>
+                            <span class="post-date">${post.date} • Δημοσιεύτηκε από: ${post.author || 'Admin'}</span>
+                            ${post.image ? `
+                            <div class="image-container">
+                                <img src="${post.image}" alt="${post.imageAlt || ''}" class="post-image">
+                                ${post.imageCaption ? `<p class="image-caption">${post.imageCaption}</p>` : ''}
+                            </div>` : ''}
+                            <p class="post-content">${post.content}</p>
+                            <a href="#" class="read-more">Διαβάστε Περισσότερα</a>
+                        </div>
+                    `).join('');
+                }
+            });
     });
 </script>
-</body>
-</html>

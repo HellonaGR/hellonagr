@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HellonaGR-blog</title>
     <style>
-        /* ===== BASE STYLES ===== */
+    
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,21 +13,80 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background-image: url("back2.png");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            color: #fff;
-            overflow-x: hidden;
+       body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-image: url("back2.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before, body::after,
+.corner-effect-1, .corner-effect-2 {
+    content: '';
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.3;
+    z-index: -1;
+    animation: float 15s infinite linear;
+}
+
+body::before {
+    top: -150px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(255,0,0,0.6) 0%, rgba(255,0,0,0) 70%);
+    animation-delay: 0s;
+}
+
+body::after {
+    bottom: -150px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(0,0,255,0.6) 0%, rgba(0,0,255,0) 70%);
+    animation-delay: 3s;
+}
+
+.corner-effect-1 {
+    top: -150px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(0,255,0,0.6) 0%, rgba(0,255,0,0) 70%);
+    animation-delay: 6s;
+}
+
+.corner-effect-2 {
+    bottom: -150px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(255,255,0,0.6) 0%, rgba(255,255,0,0) 70%);
+    animation-delay: 9s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(20px, 20px) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+}
         }
 
-        /* ===== LAYOUT ===== */
+     
         .container {
             display: flex;
             flex-direction: column;
@@ -41,7 +100,7 @@
             z-index: 1;
         }
 
-        /* ===== HEADER ===== */
+  
         h1 {
             font-size: clamp(2.5rem, 6vw, 4rem);
             color: #fff;
@@ -112,7 +171,7 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* ===== FILE CARDS ===== */
+     
         .file-card {
             position: relative;
             background: rgba(40, 40, 60, 0.7);
@@ -128,7 +187,7 @@
             overflow: hidden;
         }
 
-        /* Image container above each card */
+
         .card-image-container {
             display: flex;
             justify-content: space-between;
@@ -210,7 +269,7 @@
             transform: scale(1.3) rotate(10deg);
         }
 
-        /* ===== BUTTON ===== */
+    
         .btn {
             display: inline-block;
             padding: clamp(12px, 2vw, 16px) clamp(24px, 3vw, 32px);
@@ -256,7 +315,7 @@
             transform: translateY(2px);
         }
 
-        /* ===== MEDIA QUERIES ===== */
+      
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -327,7 +386,7 @@
 </div>
 
 <script>
-    // Add smooth scrolling to all links
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();

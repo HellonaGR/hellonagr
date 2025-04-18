@@ -1,164 +1,76 @@
-/* styles.css */
 :root {
-    --primary: #6a11cb;
-    --secondary: #2575fc;
+    --primary: #111dcb;
+    --secondary: #0adce4;
     --dark: #1a1a2e;
     --light: #f8f9fa;
     --text: #333;
-    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    --bg-gradient: linear-gradient(135deg, #979ce0 10%, #0f71e2 55%, #d4a711 100%);
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg-gradient);
     color: var(--text);
-    line-height: 1.6;
-}
-
-/* Header */
-header {
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav {
+    line-height: 1.8;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    max-width: 1200px;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    font-size: 1.2rem;
+}
+img {
+    display: block;
     margin: 0 auto;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-decoration: none;
-}
-
-.logo-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--primary);
-}
-
-.logo-text {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary);
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.nav-links a {
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--primary);
-    transition: width 0.3s;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-/* Κύριο Περιεχόμενο */
-.container {
-    max-width: 800px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
-}
-
 .page-title {
-    text-align: center;
-    margin-bottom: 3rem;
+    margin: 0;
     color: var(--primary);
-    position: relative;
+    font-size: 2.5rem;
+    text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.page-title:hover {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+    transform: scale(1.1);
 }
 
 .page-title::after {
     content: '';
     display: block;
-    width: 80px;
-    height: 4px;
+    width: 100px;
+    height: 6px;
     background: var(--secondary);
     margin: 0.5rem auto 0;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
-/* Footer */
+a {
+    text-decoration: none;
+    background: none;
+}
+
+a:hover {
+    transform: scale(1.1);
+    background: var(--primary);
+    color: white;
+}
+
 footer {
     background: var(--dark);
     color: white;
-    padding: 2rem;
+    padding: 2.5rem;
     text-align: center;
     margin-top: 3rem;
+    font-size: 1.1rem;
 }
 
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 1rem 0;
-}
-
-.social-links a {
-    color: white;
-    font-size: 1.2rem;
-    transition: color 0.3s;
-}
-
-.social-links a:hover {
-    color: var(--secondary);
-}
-
-.copyright {
-    margin-top: 1rem;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.9rem;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 0.6s ease-out;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
@@ -166,6 +78,14 @@ footer {
     }
     
     .container {
-        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        text-align: center;
+    }
+    .page-title {
+        font-size: 2rem;
     }
 }

@@ -1,150 +1,213 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HellonaGR - Blog</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-     
-        .post {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - HellonaGR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Βασικό Στυλ */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1100ff, #1eff00);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      line-height: 1.8;
+      margin: 0;
+      text-align: center;
+      font-size: 1.2rem;
+    }
 
-        .post:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+    /* Header */
+    header {
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-        .post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary);
-        }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #00c6ff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin: 0;
+    }
 
-        .post-title {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
+    header p a {
+      color: #00c6ff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid #00c6ff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        .post-meta {
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    header p a:hover {
+      background-color: #00c6ff;
+      color: #fff;
+    }
 
-        .post-meta i {
-            color: var(--primary);
-        }
+    /* Container */
+    .container {
+      margin: 2rem auto;
+      animation: slideIn 1s ease-in-out;
+    }
 
-        .post-content {
-            margin-bottom: 1.5rem;
-            color: #555;
-            line-height: 1.7;
-        }
+    .container img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 3px solid #00c6ff;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
 
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+    .container a h1 {
+      font-size: 2.5rem;
+      color: #00c6ff;
+      text-decoration: none;
+      margin: 0;
+    }
 
-        .read-more:hover {
-            color: var(--secondary);
-        }
+    .container h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #00c6ff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-top: 0.5rem;
+    }
 
-        .read-more i {
-            transition: transform 0.3s;
-        }
 
-        .read-more:hover i {
-            transform: translateX(3px);
-        }
-    </style>
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .blog-post {
+      background-color: rgba(30, 30, 30, 0.95);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .blog-post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .blog-post img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+    .blog-post-content {
+      flex: 1;
+    }
+
+    .blog-post h2 {
+      margin-top: 0;
+      color: #00c6ff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .blog-post p {
+      color: #ccc;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1e1e1e, #2e2e2e);
+      color: #ccc;
+      font-size: 1rem;
+      border-top: 3px solid #00c6ff;
+      animation: fadeIn 2s ease-in-out;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    footer a {
+      color: #00c6ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="https://hellonagr.github.io/hellonagr/" class="logo-container">
-                <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj" 
-                     alt="HellonaGR Logo" class="logo-img">
-                <span class="logo-text">HellonaGR</span>
-            </a>
-            <div class="nav-links">
-                <a href="https://hellonagr.github.io/hellonagr/">Αρχική</a>
-                <a href="https://hellonagr.github.io/hellonagr/Blog">Blog</a>
-                <a href="https://hellonagr.github.io/hellonagr/epikinonia">Επικοινωνία</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <h1 class="page-title fade-in">Το Blog μου</h1>
-        
-        <div id="posts">
-            <!-- Άρθρο 1 -->
-            <article class="post fade-in">
-                <h2 class="post-title">Ancient city seed 1.21+</h2>
-                <div class="post-meta">
-                    <i class="far fa-calendar-alt"></i>
-                    Δέν θυμάμαι!
-                </div>
-                <div class="post-content">
-                    <p></p>
-                </div>
-                <a href="https://hellonagr.github.io/hellonagr/warden-seed" class="read-more">
-                    Διαβάστε Περισσότερα
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </article>
-
-            <!-- Άρθρο 2 -->
-            <article class="post fade-in">
-                <h2 class="post-title">4 village seed 1.21 στο spawn!</h2>
-                <div class="post-meta">
-                    <i class="far fa-calendar-alt"></i>
-                   Δέν θυμάμαι!
-                </div>
-                <div class="post-content">
-                    <p>Σε αυτό το seed σε κάνει spawn ανάμεσα απο 4 plains villages!!!</p>
-                </div>
-                <a href="https://hellonagr.github.io/hellonagr/4villageseed" class="read-more">
-                    Διαβάστε Περισσότερα
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </article>
-        </div>
+  <header>
+    <p><a href="index.html">Πίσω στην αρχική</a></p>
+  </header>
+  <div class="container">
+    <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj" 
+         alt="HellonaGR">
+    <a href="https://www.youtube.com/@HellonaGR" target="_blank">
+      <h1>HellonaGR</h1>
+    </a>
+    <h2>BLOG</h2>
+  </div>
+  <main>
+    <div class="blog-post">
+      <img src="images/warden-seed-1.webp" alt="Ancient City Seed">
+      <div class="blog-post-content">
+        <h2>Ancient city seed 1.21+</h2>
+        <p>Σε αυτό το seed σε κάνει spawn μέσα σε ένα ancient city!!!</p>
+        <p><a href="https://hellonagr.github.io/hellonagr/warden-seed">Διαβάστε Περισσότερα</a></p>
+      </div>
     </div>
-
-   
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const posts = document.querySelectorAll('.post');
-            posts.forEach((post, index) => {
-                post.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
-    </script>
+    <div class="blog-post">
+      <img src="images/4villageseed-1.png" alt="Village Seed">
+      <div class="blog-post-content">
+        <h2>4 village seed 1.21 στο spawn!</h2>
+        <p>Σε αυτό το seed σε κάνει spawn ανάμεσα από 4 plains villages!!!</p>
+        <p><a href="https://hellonagr.github.io/hellonagr/4villageseed">Διαβάστε Περισσότερα</a></p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p><a href="https://hellonagr.github.io/hellonagr/epikinonia">Επικοινωνία</a> μαζί μου</p>
+    <p>Κάντε subscribe στο <a href="https://www.youtube.com/@HellonaGR" target="_blank">YouTube</a> (HellonaGR)</p>
+    <p>Μπείτε στον <a href="https://discord.com/invite/Dkhky9ZBqp">Discord</a> server μου</p>
+    <p>Κάντε subscribe στο <a href="https://www.planetminecraft.com/member/hellonagr">Planet Minecraft Community</a> (HellonaGR)</p>
+    <p>Δείτε τον κώδικα του site μου στο github απο <a href="https://github.com/HellonaGR/hellonagr">εδώ</a></p>
+  </footer>
 </body>
 </html>

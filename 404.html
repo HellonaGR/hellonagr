@@ -7,60 +7,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
-      line-height: 1.2;
       margin: 0;
-    }
-
-    html {
-      color: #888;
-      display: table;
-      font-family: sans-serif;
-      height: 100%;
-      text-align: center;
-      width: 100%;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      display: table-cell;
-      vertical-align: middle;
-      margin: 2em auto;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1100ff, #1eff00);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
     }
 
     h1 {
-      color: #555;
-      font-size: 2em;
-      font-weight: 400;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     p {
-      margin: 0 auto;
-      width: 280px;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ddd;
     }
 
-    @media only screen and (max-width: 280px) {
+    a {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: #00c6ff;
+      text-decoration: none;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.2s;
+    }
 
-      body,
-      p {
-        width: 95%;
-      }
-
-      h1 {
-        font-size: 1.5em;
-        margin: 0 0 0.3em;
-      }
-
+    a:hover {
+      background: #0072ff;
+      transform: translateY(-3px);
     }
   </style>
 </head>
 
 <body>
-  <h1>Page Not Found</h1>
-<h1><a href="index.html">Home</a></h1>
-
-
-
-
+  <div>
+    <h1>404 - Page Not Found</h1>
+    <p>Η σελίδα που ψάχνετε δεν υπάρχει. Επιστρέψτε στην αρχική σελίδα.</p>
+    <a href="index.html">Επιστροφή στην Αρχική</a>
+  </div>
 </body>
 
 </html>
-<!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->

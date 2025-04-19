@@ -5,85 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Επικοινωνία - HellonaGR</title>
   <style>
-    :root {
-      --primary-color: #4eff0b;
-      --text-color: #333;
-      --shadow-color: rgba(0, 0, 0, 0.2);
-      --white-transparent: rgba(255, 255, 255, 0.8);
-      --white-transparent-hover: rgba(255, 255, 255, 0.95);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     body {
       text-align: center;
       background: linear-gradient(120deg, #00f2fe, #4facfe, #43e97b);
       background-size: 200% 200%;
       animation: gradientShift 10s ease-in-out infinite;
       background-attachment: fixed;
-      background-color: #111;
       font-family: Arial, sans-serif;
       min-height: 100vh;
-      color: var(--text-color);
+      color: #333;
+      margin: 0;
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      color: #000000;
-      text-shadow: 2px 2px 5px var(--shadow-color);
-      margin: 20px 0;
-      animation: fadeIn 1s ease-in-out;
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header .logo-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    header .logo-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    header .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    header .nav-links a:hover {
+      color: #00c6ff;
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .contact-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 600px;
-      width: 100%;
-      animation: slideUp 0.8s ease-out;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--white-transparent);
+      background: rgba(255, 255, 255, 0.8);
       padding: 15px 20px;
       border-radius: 10px;
-      box-shadow: 0px 4px 8px var(--shadow-color);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
       text-decoration: none;
-      color: var(--text-color);
+      color: #333;
       width: 100%;
+      margin-bottom: 1rem;
     }
 
     .contact-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0px 8px 16px var(--shadow-color);
-      background: var(--white-transparent-hover);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.95);
     }
 
     .contact-item img {
@@ -96,146 +90,74 @@
       transform: scale(1.1);
     }
 
-    .profile-img {
-      width: clamp(150px, 30vw, 200px);
-      height: clamp(150px, 30vw, 200px);
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid var(--primary-color);
-      box-shadow: 0 4px 8px var(--shadow-color);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0.7); }
-      70% { box-shadow: 0 0 0 15px rgba(78, 255, 11, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(78, 255, 11, 0); }
-    }
-
     .contact-text {
-      font-size: clamp(1rem, 4vw, 1.25rem);
+      font-size: 1.2rem;
       font-weight: bold;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .youtube-text, .planet-minecraft-text {
-      font-size: clamp(1.1rem, 4vw, 1.5rem);
-      font-weight: bold;
-      color: #FF0000;
-    }
-
-    .copy-container {
-      justify-content: space-between;
-      padding: 15px 20px;
-    }
-
-    .copy-button {
-      background: var(--white-transparent);
+    .copy-btn {
+      background: #00c6ff;
+      color: #fff;
       border: none;
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0px 4px 8px var(--shadow-color);
-      transition: all 0.3s ease;
-      color: var(--text-color);
+      font-size: 1rem;
+      margin-left: 10px;
+      transition: background 0.3s;
     }
 
-    .copy-button:hover {
-      background: var(--white-transparent-hover);
-      transform: translateY(-3px);
-      box-shadow: 0px 8px 16px var(--shadow-color);
+    .copy-btn:hover {
+      background: #0072ff;
     }
 
-    @media (max-width: 768px) {
-      .contact-item {
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-      }
-
-      .contact-item img {
-        margin-right: 0;
-        margin-bottom: 10px;
-      }
-
-      .contact-text, .youtube-text, .planet-minecraft-text {
-        white-space: normal;
-      }
-
-      .copy-container {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .copy-button {
-        width: 100%;
-      }
+    .copy-message {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: green;
+      display: none;
     }
 
-    @media (max-width: 480px) {
-      .profile-img {
-        border-width: 3px;
-      }
-
-      .contact-item {
-        padding: 12px;
-      }
-
-      .contact-item img {
-        width: 30px;
-      }
-
-      .contact-item img[width="100"] {
-        width: 80px;
-      }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>
-      <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj"
-           alt="Profile Picture"
-           class="profile-img">
-      <br>
-      HellonaGR
-    </h1>
-
-    <div class="contact-container">
-      <a href="mailto:hellonagr@gmail.com" class="contact-item">
-        <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" width="40">
-        <span class="contact-text">hellonagr@gmail.com</span>
-      </a>
-
-      <!-- Κουτί με Αντιγραφή -->
-      <div class="contact-item copy-container">
-        <span id="email-text" class="contact-text">hellonagr@gmail.com</span>
-        <button onclick="copyEmail()" class="copy-button">Αντιγραφή</button>
-      </div>
+  <header>
+    <a href="https://hellonagr.github.io/hellonagr/" class="logo-container">
+      <img src="https://yt3.googleusercontent.com/zq_PJG5ZqWI5Y6ZEjkdkqqE8UdQxUNoY2vtSDM3bHWikqVejo0SMDFj04L0s3zcLGksbCkzS-Q=s160-c-k-c0x00ffffff-no-rj" 
+           alt="HellonaGR Logo" class="logo-img">
+      <span class="logo-text">HellonaGR</span>
+    </a>
+    <div class="nav-links">
+      <a href="https://hellonagr.github.io/hellonagr/">Αρχική</a>
+      <a href="https://hellonagr.github.io/hellonagr/Blog">Blog</a>
+      <a href="https://hellonagr.github.io/hellonagr/epikinonia" style="color: #00c6ff">Επικοινωνία</a>
     </div>
+  </header>
+
+  <div class="container">
+    <h1>HellonaGR</h1>
+    <div class="contact-item">
+      <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" width="40">
+      <span class="contact-text" id="email-text">hellonagr@gmail.com</span>
+      <button class="copy-btn" onclick="copyEmail()">Αντιγραφή</button>
+    </div>
+    <div class="copy-message" id="copy-message">Το email αντιγράφηκε!</div>
+    <a href="mailto:hellonagr@gmail.com" class="contact-item">Αποστολή Email</a>
   </div>
 
   <script>
     function copyEmail() {
-      const email = document.getElementById("email-text").textContent;
-      navigator.clipboard.writeText(email).then(() => {
-        const btn = document.querySelector(".copy-button");
-        btn.textContent = "✅ Αντιγράφηκε!";
+      const emailText = document.getElementById('email-text').textContent;
+      navigator.clipboard.writeText(emailText).then(() => {
+        const copyMessage = document.getElementById('copy-message');
+        copyMessage.style.display = 'block';
         setTimeout(() => {
-          btn.textContent = "Αντιγραφή";
+          copyMessage.style.display = 'none';
         }, 2000);
       });
     }

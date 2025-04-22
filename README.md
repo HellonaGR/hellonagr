@@ -1,4 +1,5 @@
-# 👋 Hello, I'm @HellonaGR
+# English  
+👋 Hello, I'm @HellonaGR
 
 🎥 YouTuber | 💻 Creator | 🌍 Based in Greece
 
@@ -14,16 +15,16 @@ I’m currently working on my personal website — it's still in progress, but y
 
 ---
 
-## 🇬🇷 Ελληνικά
+# Ελληνικά  
+👋 Γεια σου! Είμαι η @HellonaGR
 
-Γεια σου! Είμαι η **@HellonaGR**  
 🎥 YouTuber | 💻 Δημιουργός περιεχομένου | 📍 Από την Ελλάδα
 
 Καλωσόρισες στο GitHub προφίλ μου!  
 Αυτή την περίοδο φτιάχνω το προσωπικό μου website — είναι ακόμα σε εξέλιξη, αλλά μπορείς ήδη να το δεις:
 
 🌐 Δες το site μου: [hellonagr.github.io/hellonagr](https://hellonagr.github.io/hellonagr)  
-📺 Κάνε μια επίσκεψη στο κανάλι μου στο YouTube: [@HellonaGR](https://www.youtube.com/@hellonagr)
+📺 Δες το κανάλι μου στο YouTube: [@HellonaGR](https://www.youtube.com/@hellonagr)
 
 ---
 
